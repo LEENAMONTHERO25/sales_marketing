@@ -4,6 +4,10 @@ numpy
 seaborn
 ipykernel
 Flask
+matplotlib
+catboost
+xgboost
+dill
 
 
 
