@@ -31,7 +31,7 @@ class DataTransformation:
             logging.info('Data Transformation initiated')
             
             # Define which columns should be one hot-encoded and which should be scaled
-            categorical_cols = ['Item_Identifier', 'Item_Fat_Content', 'Item_Type', 'Outlet_Identifier',
+            categorical_cols = ['Item_Fat_Content', 'Item_Type', 'Outlet_Identifier',
                                'Outlet_Size', 'Outlet_Location_Type', 'Outlet_Type']
             numerical_cols = ['Item_Weight', 'Item_Visibility', 'Item_MRP',
                              ]
@@ -55,13 +55,13 @@ class DataTransformation:
 
             )
 
-            logging.info(f"Categorical columns: {categorical_columns}")
-            logging.info(f"Numerical columns: {numerical_columns}")
+            logging.info(f"Categorical columns: {categorical_cols}")
+            logging.info(f"Numerical columns: {numerical_cols}")
 
             preprocessor=ColumnTransformer(
                 [
-                ("num_pipeline",num_pipeline,numerical_columns),
-                ("cat_pipelines",cat_pipeline,categorical_columns)
+                ("num_pipeline",num_pipeline,numerical_cols),
+                ("cat_pipelines",cat_pipeline,categorical_cols)
 
                 ]
 
@@ -71,7 +71,7 @@ class DataTransformation:
             return preprocessor
         
         except Exception as e:
-            raise CustomException(e,sys)
+            raise customexception(e,sys)
         
     def initiate_data_transformation(self,train_path,test_path):   #we get this from data ingestion
 
@@ -83,7 +83,7 @@ class DataTransformation:
 
             logging.info("Obtaining preprocessing object")
 
-            preprocessing_obj=self.get_data_transformer_object()
+            preprocessing_obj=self.get_data_transformation()
 
             target_column_name="Item_Outlet_Sales"
             drop_columns = [target_column_name,'Item_Identifier', 'Outlet_Establishment_Year']
@@ -91,7 +91,7 @@ class DataTransformation:
             input_feature_train_df=train_df.drop(columns=drop_columns,axis=1)
             target_feature_train_df=train_df[target_column_name]
 
-            input_feature_test_df=test_df.drop(columns=drop_columns                                                                                                                                                                                                                                                                                                                                                                                                          ,axis=1)
+            input_feature_test_df=test_df.drop(columns=drop_columns ,axis=1)
             target_feature_test_df=test_df[target_column_name]
 
             logging.info(
@@ -122,6 +122,6 @@ class DataTransformation:
             )
         except Exception as e:
 
-            raise CustomException(e,sys)
+            raise customexception(e,sys)
         
       

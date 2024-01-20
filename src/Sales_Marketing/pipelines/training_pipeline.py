@@ -1,6 +1,6 @@
 from src.Sales_Marketing.components.data_ingestion import DataIngestion
 
-from src.Sales_Marketing.data_transformation import DataTransformation
+from src.Sales_Marketing.components.data_transformation import DataTransformation
 
 from src.Sales_Marketing.components.model_trainer import ModelTrainer
 
@@ -18,7 +18,7 @@ train_data_path,test_data_path=obj.initiate_data_ingestion()
 
 data_transformation=DataTransformation()
 
-train_arr,test_arr=data_transformation.initialize_data_transformation(train_data_path,test_data_path)
+train_arr,test_arr=data_transformation.initiate_data_transformation(train_data_path,test_data_path)
 
 
 model_trainer_obj=ModelTrainer()
