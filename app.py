@@ -24,6 +24,7 @@ def predict_datapoint():
             Item_Visibility = float(request.form.get('Item_Visibility')),
             Item_Type= float(request.form.get('Item_Type')),
             Item_MRP = float(request.form.get('Item_MRP')),
+            Outlet_Years = float(request.form.get('Outlet_Years')),
             Outlet_Identifier = float(request.form.get('Outlet_Identifier')),
             Outlet_Size = request.form.get('Outlet_Size'),
             Outlet_Location_Type= request.form.get('Outlet_Location_Type'),
