@@ -34,7 +34,7 @@ class DataTransformation:
             numerical_cols = ['Item_Weight', 'Item_Visibility', 'Item_MRP', 'Outlet_Years'
                              ]
             
-            Item_Fat_Content_catagories=['Low Fat','low fat','LF', 'Regular','reg']
+            Item_Fat_Content_catagories=['Low Fat', 'Regular']
 
             Item_Type_catagories=['Dairy', 'Soft Drinks', 'Meat', 'Fruits and Vegetables',
                                   'Household', 'Baking Goods', 'Snack Foods', 'Frozen Foods',

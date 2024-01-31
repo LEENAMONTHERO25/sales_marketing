@@ -20,6 +20,12 @@ class DataIngestionConfig:
 class DataIngestion:
     def __init__(self):
         self.ingestion_config=DataIngestionConfig()
+    
+    def replace_item_fat_content(self, data):
+        # Replace values in 'Item_Fat_Content'
+        data['Item_Fat_Content'] = data['Item_Fat_Content'].replace(['low fat', 'LF'], 'Low Fat')
+        data['Item_Fat_Content'] = data['Item_Fat_Content'].replace(['reg'], 'Regular')
+        return data
 
     def create_outlet_years(self, data):
         # Convert "Outlet_Establishment_Year" to datetime
@@ -42,6 +48,9 @@ class DataIngestion:
         try:
             data = pd.read_csv(Path(self.ingestion_config.raw_data_path))
             logging.info(" i have read dataset as a df")
+
+            # Replace values in 'Item_Fat_Content'
+            data = self.replace_item_fat_content(data)
             
             
             os.makedirs(os.path.dirname(os.path.join(self.ingestion_config.raw_data_path)),exist_ok=True)
