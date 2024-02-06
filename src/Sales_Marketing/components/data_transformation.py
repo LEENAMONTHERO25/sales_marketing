@@ -56,18 +56,20 @@ class DataTransformation:
             ## Numerical Pipeline
             num_pipeline=Pipeline(
                 steps=[
-                ('imputer',SimpleImputer(strategy='median')),
+                ('imputer',SimpleImputer(strategy='mean')),
                 ('scaler',StandardScaler())
 
                 ]
 
             )
             
-            # Categorigal Pipeline
-            cat_pipeline=Pipeline(
+         
+
+            cat_pipeline = Pipeline(
                 steps=[
-                ('imputer',SimpleImputer(strategy='most_frequent')),
-                ('ordinalencoder',OrdinalEncoder(categories=[Item_Fat_Content_catagories,
+                ('imputer', SimpleImputer(strategy='most_frequent')),
+                ('ordinalencoder', OrdinalEncoder(
+                                                categories= [Item_Fat_Content_catagories,
                                                              Item_Type_catagories,
                                                              Outlet_Identifier_catagories,
                                                              Outlet_Size_catagories,
@@ -99,6 +101,13 @@ class DataTransformation:
         try:
             train_df=pd.read_csv(train_path)
             test_df=pd.read_csv(test_path)
+
+             # Handle missing values in train and test datasets
+            train_df['Item_Weight'].fillna(train_df['Item_Weight'].mean(), inplace=True)
+            train_df['Outlet_Size'].fillna(train_df['Outlet_Size'].mode()[0], inplace=True)
+
+            test_df['Item_Weight'].fillna(test_df['Item_Weight'].mean(), inplace=True)
+            test_df['Outlet_Size'].fillna(test_df['Outlet_Size'].mode()[0], inplace=True)
             
             logging.info("read train and test data complete")
               # Convert 'Outlet_Establishment_Year' to datetime

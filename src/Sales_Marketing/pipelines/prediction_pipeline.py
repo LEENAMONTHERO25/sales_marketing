@@ -4,6 +4,7 @@ import pandas as pd
 from src.Sales_Marketing.exception import customexception
 from src.Sales_Marketing.logger import logging
 from src.Sales_Marketing.utils.utils import load_object
+from sklearn.impute import SimpleImputer
 
 
 class PredictPipeline:
@@ -17,9 +18,10 @@ class PredictPipeline:
             
             preprocessor=load_object(preprocessor_path)
             model=load_object(model_path)
-            
+
+           
             scaled_data=preprocessor.transform(features)
-            
+          
             pred=model.predict(scaled_data)
             
             return pred
@@ -28,7 +30,10 @@ class PredictPipeline:
         
         except Exception as e:
             raise customexception(e,sys)
-    
+        
+       
+
+
     
     
 class CustomData:
@@ -78,3 +83,6 @@ class CustomData:
             except Exception as e:
                 logging.info('Exception Occured in prediction pipeline')
                 raise customexception(e,sys)
+            
+
+           

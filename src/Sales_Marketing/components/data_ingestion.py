@@ -49,9 +49,13 @@ class DataIngestion:
             data = pd.read_csv(Path(self.ingestion_config.raw_data_path))
             logging.info(" i have read dataset as a df")
 
+            # Handle missing values
+            data['Item_Weight'].fillna(data['Item_Weight'].mean(), inplace=True)
+            data['Outlet_Size'].fillna(data['Outlet_Size'].mode()[0], inplace=True)
+
+
             # Replace values in 'Item_Fat_Content'
             data = self.replace_item_fat_content(data)
-            
             
             os.makedirs(os.path.dirname(os.path.join(self.ingestion_config.raw_data_path)),exist_ok=True)
             data.to_csv(self.ingestion_config.raw_data_path,index=False)
